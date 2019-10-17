@@ -1,0 +1,17 @@
+data = File.openDialog("Choose a File");
+dataset_name = File.getName(data);
+directory = File.getParent(path);
+stack_directory = directory + '/z_stacks';
+File.makeDirectory(stack_directory);
+open(data);
+	for (j=1; j<30; j++) {; 
+	selectWindow(dataset_name);
+	run("Reduce Dimensionality...", "slices keep");
+	z_stack_name = "z_stack_" + j + '_' + dataset_name ;
+	rename(z_stack_name);
+	save_name = stack_directory + '/' + z_stack_name;
+	saveAs("Tiff", save_name);
+	close(z_stack_name);
+	selectWindow(dataset_name);
+	setSlice(60 * j + 1);
+	};
